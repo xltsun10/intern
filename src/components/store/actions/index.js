@@ -1,9 +1,10 @@
 import axios from "axios";
 import * as Types from "../type/index";
 // const baseURL = "https://api.themoviedb.org/3";
-const API_KEY = process.env.REACT_APP_API_KEY;
-const BASE_URL = process.env.REACT_APP_BASE_URL;
-
+// const API_KEY = process.env.REACT_APP_API_KEY;
+// const BASE_URL = process.env.REACT_APP_BASE_URL;
+const API_KEY = '2a629a7a5736c016f24adf125a0d5da6';
+const BASE_URL = 'https://api.themoviedb.org/3';
 export const getNetflixOriginals = () => async (dispatch) => {
   try {
     const result = await axios.get(

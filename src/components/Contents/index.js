@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MoviesRow from "./MoviesRow";
-import * as ACTIONS from "../../store/actions";
+import * as ACTIONS from "../store/actions";
 import { FaArrowAltCircleUp } from "react-icons/fa";
 import styled from "styled-components";
 import { useScroll } from "../../hooks";

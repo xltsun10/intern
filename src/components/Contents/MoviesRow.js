@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { SmoothHorizontalScrolling } from "../../utils";
 import { useDispatch } from "react-redux";
-import { setMovieDetails } from "../../store/actions";
+import { setMovieDetails } from "../store/actions";
 import { useViewport } from "../../hooks";
 
 const IMAGE_URL = process.env.REACT_APP_BASE_IMAGE_URL;

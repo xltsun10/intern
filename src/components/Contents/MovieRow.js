@@ -18,7 +18,7 @@ import { useViewport } from "../../hooks/useViewport";
 // ];
 
 function MovieRow(props) {
-  const {movies,title}=props;
+  const {movies,title, isNetflix}=props;
   const sliderRef = useRef();  
   const itemRef = useRef();
   const [dragDown, setDragDown] = useState(0);
@@ -98,31 +98,42 @@ function MovieRow(props) {
         }
         >
         
-          {movies.length > 0 &&
-            movies.map((movie, index) => (
-              <div
-                key={index}
-                className="movieItem"
-                draggable="false"
-                ref={itemRef}
-              >
-                <img
-                  src={movie}
-                  alt=""
+        {movies &&
+          movies.length > 0 &&
+          movies.map((movie, index) => {
+            if (movie.poster_path && movie.backdrop_path !== null) {
+              let imageUrl = isNetflix
+                ? `https://image.tmdb.org/t/p/original/${movie.poster_path}`
+                : `https://image.tmdb.org/t/p/w500/${movie.backdrop_path}`;
+              return (
+                <div
+                  key={index}
+                  className="movieItem"
                   draggable="false"
-                  onDragStart={(e) => {
-                    e.preventDefault();
-                  }}
-                />
-                <div className="movieName">Name movie</div>
-              </div>
-            ))}
+                  ref={itemRef}
+                  // onClick={() => handleSelectMovie(movie)}
+                >
+                  <img
+                    src={imageUrl}
+                    alt=""
+                    draggable="false"
+                    onDragStart={(e) => {
+                      e.preventDefault();
+                    }}
+                  />
+                  <div className="movieName">{movie.title || movie.name}</div>
+                </div>
+              );
+            }
+          })}
         </InfoMoviesSlider>     
-
-      <div className="btnLeft" onClick={handleScrollLeft}>
+      
+      <div className={`btnLeft ${isNetflix && "isNetflix"}`}
+        onClick={handleScrollLeft}>
         <FiChevronLeft />
       </div>
-      <div className="btnRight" onClick={handleScrollRight}>
+      <div className={`btnRight ${isNetflix && "isNetflix"}`}
+        onClick={handleScrollRight}>
         <FiChevronRight />
       </div>
     </ContentsSection>
@@ -163,6 +174,12 @@ const ContentsSection = styled.section`
         opacity: 1;
         transform: scale(1.2);
       }
+
+    
+    }
+    &.isNetflix {
+      height: 100px;
+      width: max-content;
     }
   }
   .btnRight {

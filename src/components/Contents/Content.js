@@ -1,10 +1,10 @@
-// import React, { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import MovieRow from './MovieRow';
-// import { useDispatch, useSelector } from 'react-redux';
-// // import { GET_NETFLIX_ORIGINALS } from '../../store/type';
-// import * as ACTIONS from '../store/actions'
-// import { useScroll } from "../../hooks";
-// import { animateScroll as scroll } from "react-scroll";
+import { useDispatch, useSelector } from 'react-redux';
+import { GET_NETFLIX_ORIGINALS } from '../store/type';
+import * as ACTIONS from '../store/actions'
+import { useScroll } from "../../hooks";
+
 const movies = [
   "https://m.media-amazon.com/images/I/61Fm+N+NncL._AC_SL1008_.jpg",
   "https://i.pinimg.com/originals/a9/c7/d3/a9c7d36b3aaee651d8f120257587e27b.jpg",
@@ -20,47 +20,45 @@ const movies = [
 ];
 
 function Content (props)  {
-  // const dispatch = useDispatch();
-  // const [scrollDimensions] = useScroll();
-  // const {
-  //   NetflixOriginals,
-  //   TrendingMovies,
-  //   TopRatedMovies,
-  //   ActionMovies,
-  //   ComedyMovies,
-  //   HorrorMovies,
-  //   RomanceMovies,
-  //   Documentaries,
-  // } = useSelector((state) => state.infoMovies);
+  
+  const dispatch = useDispatch();
+  const {NetflixOriginals,
+        TrendingMovies,  
+        TopRatedMovies,
+        ActionMovies,
+        ComedyMovies,
+        HorrorMovies,
+        RomanceMovies,
+        Documentaries,
+        MovieDetails,
+        SearchMovies,
+        SearchResult
+  
+  } = useSelector(state => state.infoMovies);
 
-  // useEffect(() => {
-  //   dispatch(ACTIONS.getNetflixOriginals());
-  //   dispatch(ACTIONS.getTrendingMovies());
-  //   dispatch(ACTIONS.getTopRatedMovies());
-  //   dispatch(ACTIONS.getActionMovies());
-  //   dispatch(ACTIONS.getComedyMovies());
-  //   dispatch(ACTIONS.getHorrorMovies());
-  //   dispatch(ACTIONS.getRomanceMovies());
-  //   dispatch(ACTIONS.getDocumentaries());
-  // }, [dispatch]);
-  // const dispatch = useDispatch();
-  // const {NetflixOriginals} = useSelector(state => state.infoMovies);
+  useEffect(() => {
+    dispatch(ACTIONS.getNetflixOriginals());
+    dispatch(ACTIONS.getTrendingMovies());
+    dispatch(ACTIONS.getTopRatedMovies());
+    dispatch(ACTIONS.getActionMovies());
+    dispatch(ACTIONS.getComedyMovies());
+    dispatch(ACTIONS.getHorrorMovies());
+    dispatch(ACTIONS.getRomanceMovies());
+    dispatch(ACTIONS.getDocumentaries());
+  }, [dispatch]);
 
-  // useEffect(() => {
-  //   dispatch(getNetflixOriginals());
-  // }, [dispatch]);
-
-
+  
+  console.log(NetflixOriginals);
   return (
     <div>
-      <MovieRow movies={movies} title= "Netfix Originals"/>
-      <MovieRow movies={movies} title= "Treding Movies"/>
-      <MovieRow movies={movies} title= "Top rated"/>
-      <MovieRow movies={movies} title= "Action Originals"/>
-      <MovieRow movies={movies} title= "Comedy Originals"/>
-      <MovieRow movies={movies} title= "Horror Originals"/>
-      <MovieRow movies={movies} title= "Romance Originals"/>
-      <MovieRow movies={movies} title= "Documentaries Originals"/>
+      <MovieRow movies={NetflixOriginals} title= "Netfix Originals" isNetflix={true}/>
+      <MovieRow movies={TrendingMovies} title= "Treding Movies"/>
+      <MovieRow movies={TopRatedMovies} title= "Top rated"/>
+      <MovieRow movies={ActionMovies} title= "Action Originals"/>
+      <MovieRow movies={ComedyMovies} title= "Comedy Originals"/>
+      <MovieRow movies={HorrorMovies} title= "Horror Originals"/>
+      <MovieRow movies={RomanceMovies} title= "Romance Originals"/>
+      <MovieRow movies={Documentaries} title= "Documentaries Originals"/>
     </div>
   );
 }

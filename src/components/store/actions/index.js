@@ -113,6 +113,10 @@ export const setMovieDetails = (movie) => dispatch => {
   dispatch({type: Types.SET_MOVIE_DETAILS, payload: movie});
   
 }
+export const setWatchMovie = (movie) => dispatch => {      
+  dispatch({type: Types.SET_WATCH_MOVIE, payload: movie});
+  
+}
 
 export const getSeachMovies = (keywords) => async dispatch => {
   try {    

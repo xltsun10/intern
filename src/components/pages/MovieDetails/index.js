@@ -3,16 +3,21 @@ import React from "react";
 import { MdClose } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import styled, { keyframes } from "styled-components";
-import { setMovieDetails } from "../../store/actions";
+import { setMovieDetails, setWatchMovie } from "../../store/actions";
+import { useHistory, useNavigate } from 'react-router-dom';
 
 
 function MovieDetailsPage(props) {
   const {  movie,  showModal } = props;
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleCloseModal = () => dispatch(setMovieDetails(null));
+  // const handleSelectMovie = (movie) => dispatch(setMovieDetails(movie))
 
-  const handleWatchMovie = () => {
-    // Xử lý khi người dùng click vào nút "Xem phim"
+  const handleWatchMovie = (movie) => {
+    dispatch(setWatchMovie(movie));
+    
+    navigate(`/watch`)
     console.log("Xem phim");
   };
   return (
@@ -64,7 +69,7 @@ function MovieDetailsPage(props) {
                   : "")}
             </p>
             <p className="overview">{movie && movie.overview}</p>
-            <button className="watchButton" onClick={handleWatchMovie}>
+            <button className="watchButton" onClick={handleWatchMovie} >
               Watch Now
             </button>
           </div>

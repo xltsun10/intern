@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import MenuItem from "./MenuItem";
 import { FaHome, FaHotjar, FaStar } from "react-icons/fa";
-import { MdTheaterComedy } from "react-icons/md";
+import { MdTheaterComedy,MdAccountCircle } from "react-icons/md";
 import {
   GiNinjaHeroicStance,
   GiRomanToga,
@@ -25,6 +25,7 @@ function Menus(props) {
       <MenuItem to="horrorMovies" name="Horror Movies" Icon={GiGhost} />
       <MenuItem to="romanceMovies" name="Romance Movies" Icon={GiRomanToga} />
       <MenuItem to="documentaries" name="Documentaries" Icon={GiBandageRoll} />
+      <MenuItem to="account" name="Account" Icon={MdAccountCircle} />
     </MenusPane>
   );
 }

@@ -10,14 +10,18 @@ const reducerMoviesInitialState = {
   Documentaries: null,
   MovieDetails: null,
   SearchMovies: null,
-  SearchResult: false,
+  SearchResult: null,
 }
 const reducerMovies = (state = reducerMoviesInitialState, action) => {
-   const {type, payload} = action;
+  const {type, payload} = action;
   switch (type) {
     case Types.GET_NETFLIX_ORIGINALS:    
-      console.log(payload);
-      return {...state}
+      return {...state, NetflixOriginals: payload}
+
+
+    // case Types.GET_NETFLIX_ORIGINALS:    
+    //   console.log(payload);
+    //   return {...state}
 
     case Types.GET_TRENDING_MOVIES:         
       

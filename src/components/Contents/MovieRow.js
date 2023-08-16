@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
 import { useViewport } from "../../hooks/useViewport";
+import { useDispatch } from "react-redux";
+import { setMovieDetails } from "../store/actions";
 
 // const movies = [
 //   "https://m.media-amazon.com/images/I/61Fm+N+NncL._AC_SL1008_.jpg",
@@ -18,14 +20,17 @@ import { useViewport } from "../../hooks/useViewport";
 // ];
 
 function MovieRow(props) {
-  const {movies,title, isNetflix}=props;
+  const {movies,title, isNetflix, idSection}=props;
   const sliderRef = useRef();  
   const itemRef = useRef();
   const [dragDown, setDragDown] = useState(0);
   const [dragUp, setDragUp] = useState(0);
   const [mouseLeave, setMouseLeave] = useState(false);
   const [windowDimensions] = useViewport();
-    
+  
+  const dispatch = useDispatch();
+  const handleSelectMovie = (movie) => dispatch(setMovieDetails(movie))
+
   const handleScrollRight = () => {
     const maxScrollLeft =
       sliderRef.current.scrollWidth - sliderRef.current.clientWidth;
@@ -78,7 +83,7 @@ function MovieRow(props) {
   });
 
   return (
-    <ContentsSection draggable="false">
+    <ContentsSection draggable="false" id={idSection}>
       <h1 className="heading">{title}</h1>      
         <InfoMoviesSlider ref={sliderRef} draggable="false"
         style={
@@ -111,7 +116,7 @@ function MovieRow(props) {
                   className="movieItem"
                   draggable="false"
                   ref={itemRef}
-                  // onClick={() => handleSelectMovie(movie)}
+                  onClick={() => handleSelectMovie(movie)}
                 >
                   <img
                     src={imageUrl}

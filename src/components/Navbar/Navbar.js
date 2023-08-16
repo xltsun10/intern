@@ -3,17 +3,45 @@ import NetflixLogo from '../../assets/images/Netflix_Logo_RGB.png';
 import { MdSearch } from "react-icons/md";
 import styled from 'styled-components';
 import { useScroll } from '../../hooks/useScroll';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 function Navbar(props){
     const [scrollY]= useScroll();
+    const [keywords, setKeywords] = useState('');
+    const navigate = useNavigate();
+
+    const handleChangeInput = (e) => {
+        
+        let keywords = e.target.value;
+    
+        setKeywords(keywords);
+        console.log(keywords);
+        if(keywords.length > 0){
+            navigate(`/search?keyword=${keywords.trim()}`)
+        }else{
+            navigate(`/`)
+        }
+    }
+
+    const goHome =() =>{
+        navigate(`/`);
+        setKeywords("");
+    }
     return (
         <Navigation style={scrollY <50 ? {backgroundColor: 'transparent'}: {backgroundColor: 'var(--color--background'}}>
             <div className='navContainer'>
-                <div className='logo'>
+                <div className='logo' onClick={goHome}>
                     <img src={NetflixLogo} alt="logo" />
                 </div>
                 <div className='navSearch'>
                     <MdSearch className='iconSearch'/>
-                    <input type="text" placeholder="Input title to search"/>
+                    <input 
+                        type="text" 
+                        placeholder="Input title to search"
+                        onChange={handleChangeInput}
+                        value={keywords}
+                        />
+                       
                 </div>
             </div>
 
